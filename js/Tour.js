@@ -20,7 +20,7 @@ AFRAME.registerComponent("tour", {
       {
         id: "eiffel-tower",
         title: "Eiffel Tower",
-        url: "./assets/thumbnails/eiffel_tower.png",
+        url: "./assets/thumbnails/eiffel_tower.jpg",
       },
       {
         id: "new-york-city",
