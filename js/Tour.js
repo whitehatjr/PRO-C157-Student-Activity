@@ -1,7 +1,7 @@
 AFRAME.registerComponent("tour", {
   init: function () {
     this.placesContainer = this.el;
-    
+    this.createCards();
   },
 
   createCards: function () {
@@ -38,13 +38,58 @@ AFRAME.registerComponent("tour", {
       prevoiusXPosition = posX;
 
       // Border Element
-      
+      const borderEL=this.createBorder(position,item.id);
       // Thumbnail Element
-     
+     const thumbNail=this.createThumbnail(item);
+      borderEL.appendChild(thumbNail);
+      
       // Title Text Element
+      const titleEL = this.createTitleEL(position,item);
+      borderEL.appendChild(titleEL);
       
       this.placesContainer.appendChild(borderEl);
     }
   },
-  
+  createBorder:function(position,id){
+    const entityEL=document.createElement("a-entity")
+    entityEL.setAttribute("id",id);
+    entityEL.setAttribute("visible",true);
+    entityEL.setAttribute("geometry",{
+     primitive:"ring"
+      radiusInner:9,
+      radiusOuter:10,
+});
+entityEL.setAttribute("position",position);
+entityEL.setAttribute("material",{
+  color:"#0077CC",
+  opacity:1;
+});
+return entityEL;
+},
+create ThumbNail:function(item){
+  const entityEL=document.createElement("a-entity");
+  entityEL.setAttribute("visible",true);
+  entityEL.setAttribute("geometry",{
+    primitive:"circle";
+      radius:9,
+        });
+entityEL.setAttribute("material",{src:item.url});
+
+return entityEL;
+};
+createTitleEL:function(position,item){
+  const entityEl=document.createElemnt("a-entity");
+  entityEL.setAttribute("text",{
+    font:"exo2bold",
+    align:"center",
+    width:70,
+    color:"#e65100",
+    value:item.title,
+  });
+  const elposition = position;
+  elposition.y = -20;
+entityEL.setAttribute("position",elposition);
+entityEL.setAttribute("visible",true);
+  return entityEL
+},
 });
